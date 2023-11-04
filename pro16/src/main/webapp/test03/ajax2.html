@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+
+		function fn_process() {
+			$.ajax({
+				type: "post", // 통신 타입 설정
+				async: "false",
+				url: "http://localhost:8090/pro16/ajaxTest2", //요청할 url설정.
+				dataType: "xml",
+				success: function (info, textStatus) {
+					//data (또는 다른 사용자 정의 이름): 이 매개변수는 서버에서 반환된 데이터를 나타냅니다. 이 매개변수를 통해 실제 데이터를 처리하고 화면에 표시합니다.
+
+					//textStatus: 이 매개변수는 AJAX 요청의 상태를 설명하는 문자열입니다. 주로 "success", "error", "notmodified", "timeout" 등의 값을 가집니다. 요청의 상태를 확인하는 데 사용됩니다.
+
+					//jqXHR: 이 매개변수는 XMLHttpRequest 객체의 jQuery 확장입니다. 이 객체를 사용하면 요청을 중지하거나, 요청의 상태를 확인하거나, 기타 XMLHttpRequest 관련 작업을 수행할 수 있습니다. 이 매개변수는 선택적이며, 필요에 따라 사용할 수 있습니다.
+					$(info).find("book").each(function () {
+						var title = $(this).find("title").text();
+						var writer = $(this).find("writer").text();
+						var image = $(this).find("image").text();
+						$("#bookInfo").append(
+							"<p>" + title + "</p>" +
+							"<p>" + writer + "</p>" +
+							"<img src=" + image + ">"
+						);
+					});
+
+				},
+				error: function () {
+				},
+				complete: function () {
+				}
+			});
+
+		}
+
+	</script>
+</head>
+
+<body>
+	<div id="bookInfo"></div>
+	<input type=button value="도서정보 요청" onclick="fn_process()">
+</body>
+
+</html>

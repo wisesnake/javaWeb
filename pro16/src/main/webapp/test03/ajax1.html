@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+
+		function fn_process() {
+			$.ajax({
+				type: "get", // 통신 타입 설정
+				url: "http://localhost:8090/pro16/ajaxTest1", //요청할 url설정.
+				data: {toServer: "서버로 보내는 글"},
+				success: function (toClient, status) {
+					console.log("toClient : ", toClient);
+					console.log("현재 상태 : ", status);
+
+					alert(toClient);
+				},
+				error: function () {
+					//alert("error occured");
+				},
+				complete: function () {
+					//alert("completed");
+				}
+			});
+
+		}
+
+	</script>
+</head>
+
+<body>
+	<input type="button" value="전송하기" onClick="fn_process()" />
+</body>
+
+</html>
