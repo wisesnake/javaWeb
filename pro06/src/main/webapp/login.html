@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<form method="get" action="login">
+		<!--method= 는 뒤에 post나 get을 붙여서 서블릿의 http메소드인 doGet이나 doPost를 호출함.
+		action=login 을 통해 url패턴 중 일치하는 패턴을 찾아감.-->
+		아이디 : <input type="text" name="user_id"><hr>
+		<!--name은 parameter, 즉 매개값으로써 활용됨.-->
+		패스워드 : <input type="password" name="user_pw"><br>
+	
+<!--		<input type="checkbox" name="lunch" value="chicken" checked>치킨
+		<input type="checkbox" name="lunch" value="jjajang">짜장면
+		<input type="checkbox" name="lunch" value="pizza">피자<br>-->
+		
+
+		<input type="submit" value="로그인">
+		<input type="reset" value="다시 입력">
+	</form>
+</body>
+
+</html>
