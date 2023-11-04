@@ -1,0 +1,52 @@
+package sec04.ex02;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/logout")
+public class LogoutTest extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	ServletContext context;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doHandle(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doHandle(request, response);
+	}
+
+	private void doHandle(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		context = getServletContext();
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		String user_id = request.getParameter("user_id");
+
+		session.invalidate();
+		//로그아웃했으니 세션소멸
+		
+		List user_list = (ArrayList) context.getAttribute("user_list");
+		user_list.remove(user_id);
+		//얻어온 로그아웃 유저 아이디를 유저리스트 컨텍스트속성에서 제외함.
+		context.removeAttribute("user_list");
+		context.setAttribute("user_list", user_list);
+		//지운걸 다시 재바인딩함.
+		out.println("<br>로그아웃 했습니다.");
+	}
+
+}
