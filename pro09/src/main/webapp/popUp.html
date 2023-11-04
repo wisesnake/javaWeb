@@ -1,0 +1,30 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript">
+		function setPopUpStart(obj) {
+			if (obj.checked == true) {
+				/*체크박스가 true로 체크됐을 때.*/
+				var expireDate = new Date();
+				var days = 1;
+				expireDate.setDate(expireDate.getDate() + days);
+				document.cookie = "notShowPop=" + "true" + ";path=/; expires=" +
+					expireDate.toGMTString();
+				window.close();
+			}
+		}
+	</script>
+</head>
+
+<body>
+	알림 팝업창입니다.
+	<br><br><br><br><br><br><br>
+	<form>
+		<input type=checkbox onClick="setPopUpStart(this)">오늘 더 이상 팝업창 띄우지 않기
+		<!--위의 setpopupstart 메서드의 매개변수는 obj임. 그리고 여기서 매개값으로 this, 즉 input
+    자기 자신을 넣었으므로, input 자기자신이 checked를 true로 했는지(체크박스 체크) 확인하는데 쓰임.-->
+	</form>
+</body>
+
+</html />

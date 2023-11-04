@@ -1,0 +1,51 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+ <title> 자바스크립트에서 쿠키 사용 </title>
+ <script type = "text/javascript">
+  // 페이지 로드 이벤트 처리
+  window.onload = pageLoad;
+  function pageLoad(){
+  // 저장된 쿠키 읽어오기
+   notShowPop = getCookieValue();
+   if(notShowPop!="true"){
+      window.open("popUp.html","pop","width=400,height=500,history=no,resizable=no,status=no,scrollbars=yes,menubar=no");
+   }
+  }
+
+  // 쿠키 읽어오는 함수
+  function getCookieValue(){   
+     var result="false";
+   // 쿠키 여부 확인
+    if(document.cookie != ""){
+      cookie = document.cookie.split(";"); 
+      //해당 도메인의 쿠키가 여러개일 경우를 위해 ;로 나눔.
+      for(var i=0; i<cookie.length;i++){
+		  //여러개의 쿠키들 중, ;로 나뉜 여러개의 쿠키가 배열로 저장된걸 쭈욱 훑어봄
+	element=cookie[i].split("=");
+	//i번째 쿠키를 =를 기준으로 나누어서 [0]에는 키가, [1]에는 값이 들어가게 했음
+	value=element[0];				 
+	//value에 키를 넣음
+	value=value.replace(/^\s*/,''); 
+	//키의 공백을 지움
+	if(value=="notShowPop"){
+		//i번째 쿠키의 키가 notshowpop일경우, 값([1])을 result에 대입
+	 result= element[1];
+        }
+      }
+   }
+   return result;
+   //이대로 값을 가지고 나가서 쿠키가 하루동안 보지않음(true)인지 판별하는데 사용.
+   //document.cookie = "notShowPop=" + "true"
+  }
+ function  deleteCookie(){
+    document.cookie = "notShowPop=" + "false" + ";path=/; expires=-1" ;
+  }
+ </script>
+</head>
+<body>
+  <form>
+    <input type=button value="쿠키삭제"  onClick="deleteCookie()" >
+  </form>
+</body>
+</html>
