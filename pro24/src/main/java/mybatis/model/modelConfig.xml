@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- member.xml(mybatis 쿼리 설정파일) 에서 vo 클래스 경로 축약해서 사용할 별칭 정하는 설정파일 -->
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.spring.account.AccountVO"  alias="accountVO" />
+	</typeAliases>
+</configuration>
+
